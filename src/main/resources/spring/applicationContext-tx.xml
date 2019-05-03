@@ -31,6 +31,6 @@
     <!-- 切面 -->
     <aop:config>
         <aop:advisor advice-ref="txAdvice"
-                     pointcut="execution(* manage.service.*.*(..))"/>
+                     pointcut="execution(* com.bookHouse.service.*.*(..))"/>
         <!-- 具体service包的路径取决于你新建的java代码的service层包  --></aop:config>
 </beans>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bookHouse.dao.BookMapper" >
+  <resultMap id="BaseResultMap" type="com.bookHouse.domain.Book" >
+    <id column="book_id" property="bookId" jdbcType="INTEGER" />
+    <result column="book_name" property="bookName" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="publishing_house" property="publishingHouse" jdbcType="VARCHAR" />
+    <result column="nation" property="nation" jdbcType="VARCHAR" />
+    <result column="translator" property="translator" jdbcType="VARCHAR" />
+    <result column="cover_address" property="coverAddress" jdbcType="VARCHAR" />
+    <result column="book_address" property="bookAddress" jdbcType="VARCHAR" />
+    <result column="book_brief" property="bookBrief" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="class_name" property="className" jdbcType="VARCHAR" />
+    <result column="read_count" property="readCount" jdbcType="INTEGER" />
+    <result column="collect_count" property="collectCount" jdbcType="INTEGER" />
+    <result column="dr" property="dr" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    book_id, book_name, author, publishing_house, nation, translator, cover_address, 
+    book_address, book_brief, create_time, category_id, class_name, read_count, collect_count, 
+    dr
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from book
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from book
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bookHouse.domain.Book" >
+    insert into book (book_id, book_name, author, 
+      publishing_house, nation, translator, 
+      cover_address, book_address, book_brief, 
+      create_time, category_id, class_name, 
+      read_count, collect_count, dr
+      )
+    values (#{bookId,jdbcType=INTEGER}, #{bookName,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{publishingHouse,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, #{translator,jdbcType=VARCHAR}, 
+      #{coverAddress,jdbcType=VARCHAR}, #{bookAddress,jdbcType=VARCHAR}, #{bookBrief,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{categoryId,jdbcType=INTEGER}, #{className,jdbcType=VARCHAR}, 
+      #{readCount,jdbcType=INTEGER}, #{collectCount,jdbcType=INTEGER}, #{dr,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bookHouse.domain.Book" >
+    insert into book
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bookId != null" >
+        book_id,
+      </if>
+      <if test="bookName != null" >
+        book_name,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="publishingHouse != null" >
+        publishing_house,
+      </if>
+      <if test="nation != null" >
+        nation,
+      </if>
+      <if test="translator != null" >
+        translator,
+      </if>
+      <if test="coverAddress != null" >
+        cover_address,
+      </if>
+      <if test="bookAddress != null" >
+        book_address,
+      </if>
+      <if test="bookBrief != null" >
+        book_brief,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+      <if test="className != null" >
+        class_name,
+      </if>
+      <if test="readCount != null" >
+        read_count,
+      </if>
+      <if test="collectCount != null" >
+        collect_count,
+      </if>
+      <if test="dr != null" >
+        dr,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bookId != null" >
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="bookName != null" >
+        #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="publishingHouse != null" >
+        #{publishingHouse,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="translator != null" >
+        #{translator,jdbcType=VARCHAR},
+      </if>
+      <if test="coverAddress != null" >
+        #{coverAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="bookAddress != null" >
+        #{bookAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="bookBrief != null" >
+        #{bookBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="className != null" >
+        #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="readCount != null" >
+        #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="collectCount != null" >
+        #{collectCount,jdbcType=INTEGER},
+      </if>
+      <if test="dr != null" >
+        #{dr,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bookHouse.domain.Book" >
+    update book
+    <set >
+      <if test="bookName != null" >
+        book_name = #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="publishingHouse != null" >
+        publishing_house = #{publishingHouse,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="translator != null" >
+        translator = #{translator,jdbcType=VARCHAR},
+      </if>
+      <if test="coverAddress != null" >
+        cover_address = #{coverAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="bookAddress != null" >
+        book_address = #{bookAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="bookBrief != null" >
+        book_brief = #{bookBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="className != null" >
+        class_name = #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="readCount != null" >
+        read_count = #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="collectCount != null" >
+        collect_count = #{collectCount,jdbcType=INTEGER},
+      </if>
+      <if test="dr != null" >
+        dr = #{dr,jdbcType=INTEGER},
+      </if>
+    </set>
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bookHouse.domain.Book" >
+    update book
+    set book_name = #{bookName,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      publishing_house = #{publishingHouse,jdbcType=VARCHAR},
+      nation = #{nation,jdbcType=VARCHAR},
+      translator = #{translator,jdbcType=VARCHAR},
+      cover_address = #{coverAddress,jdbcType=VARCHAR},
+      book_address = #{bookAddress,jdbcType=VARCHAR},
+      book_brief = #{bookBrief,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      class_name = #{className,jdbcType=VARCHAR},
+      read_count = #{readCount,jdbcType=INTEGER},
+      collect_count = #{collectCount,jdbcType=INTEGER},
+      dr = #{dr,jdbcType=INTEGER}
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+</mapper>
