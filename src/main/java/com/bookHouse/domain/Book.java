@@ -34,6 +34,12 @@ public class Book implements Serializable {
 
     private Integer dr;
 
+    private Integer parentCategoryId;
+
+    private Integer downloadAmount;
+
+    private Integer collectAmount;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getBookId() {
@@ -154,5 +160,29 @@ public class Book implements Serializable {
 
     public void setDr(Integer dr) {
         this.dr = dr;
+    }
+
+    public Integer getParentCategoryId() {
+        return parentCategoryId;
+    }
+
+    public void setParentCategoryId(Integer parentCategoryId) {
+        this.parentCategoryId = parentCategoryId;
+    }
+
+    public Integer getDownloadAmount() {
+        return downloadAmount;
+    }
+
+    public void setDownloadAmount(Integer downloadAmount) {
+        this.downloadAmount = downloadAmount;
+    }
+
+    public Integer getCollectAmount() {
+        return collectAmount;
+    }
+
+    public void setCollectAmount(Integer collectAmount) {
+        this.collectAmount = collectAmount;
     }
 }

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bookHouse.dao.CollectionMapper">
+  <resultMap id="BaseResultMap" type="com.bookHouse.domain.Collection">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="book_id" jdbcType="INTEGER" property="bookId" />
+    <result column="book_name" jdbcType="VARCHAR" property="bookName" />
+    <result column="dr" jdbcType="VARCHAR" property="dr" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, user_name, book_id, book_name, dr
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from collection
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from collection
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bookHouse.domain.Collection">
+    insert into collection (id, user_id, user_name, 
+      book_id, book_name, dr
+      )
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{bookId,jdbcType=INTEGER}, #{bookName,jdbcType=VARCHAR}, #{dr,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bookHouse.domain.Collection">
+    insert into collection
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="bookId != null">
+        book_id,
+      </if>
+      <if test="bookName != null">
+        book_name,
+      </if>
+      <if test="dr != null">
+        dr,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="bookId != null">
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="bookName != null">
+        #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bookHouse.domain.Collection">
+    update collection
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="bookId != null">
+        book_id = #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="bookName != null">
+        book_name = #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        dr = #{dr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bookHouse.domain.Collection">
+    update collection
+    set user_id = #{userId,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      book_id = #{bookId,jdbcType=INTEGER},
+      book_name = #{bookName,jdbcType=VARCHAR},
+      dr = #{dr,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByCondition" parameterType="com.bookHouse.domain.Collection" resultMap="BaseResultMap">
+    select * from  collection where
+    1=1
+      <if test="id != null">
+      and id= #{id,jdbcType=INTEGER}
+      </if>
+      <if test="userId != null">
+      and user_id= #{userId,jdbcType=INTEGER}
+      </if>
+      <if test="userName != null">
+      and user_name  #{userName,jdbcType=VARCHAR}
+      </if>
+      <if test="bookId != null">
+       and book_id= #{bookId,jdbcType=INTEGER}
+      </if>
+      <if test="bookName != null">
+      and book_name = #{bookName,jdbcType=VARCHAR}
+      </if>
+    and dr=0
+  </select>
+
+  <select id="selectByConditionWithPage"  resultMap="BaseResultMap">
+    select * from  collection where
+    1=1
+    <if test="id != null">
+      and id= #{id,jdbcType=INTEGER}
+    </if>
+    <if test="userId != null">
+      and user_id= #{userId,jdbcType=INTEGER}
+    </if>
+    <if test="userName != null">
+      and user_name  #{userName,jdbcType=VARCHAR}
+    </if>
+    <if test="bookId != null">
+      and book_id= #{bookId,jdbcType=INTEGER}
+    </if>
+    <if test="bookName != null">
+      and book_name = #{bookName,jdbcType=VARCHAR}
+    </if>
+    and dr=0
+    limit ${start},${limit}
+  </select>
+</mapper>

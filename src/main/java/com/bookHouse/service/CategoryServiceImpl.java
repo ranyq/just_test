@@ -21,4 +21,15 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryMapper.selectAllCategory();
     }
 
+    @Override
+    public String addCategory(Category category) {
+        categoryMapper.insertSelective(category);
+        return "";
+    }
+
+    public int deleteById(int id){
+        return categoryMapper.deleteById(id);
+    }
+
+
 }

@@ -155,7 +155,7 @@
     <where>
       1=1
     <if test="name != null">
-      and name = "123"
+      and name = #{name,jdbcType=VARCHAR}
     </if>
     <if test="password != null">
       and password = #{password,jdbcType=VARCHAR}
@@ -176,5 +176,15 @@
      and  forzen_time = #{forzenTime,jdbcType=TIMESTAMP}
     </if>
     </where>
+  </select>
+  <select id="selectByKeywordWithPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from user where 1=1
+    <if test="keyword != null">
+      and name like concat('%',#{keyword},'%')
+    </if>
+    <if test="start !=null and limit !=null ">
+      limit #{start},#{limit}
+    </if>
+
   </select>
 </mapper>

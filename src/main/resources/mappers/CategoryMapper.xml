@@ -93,4 +93,8 @@
   <select id="selectAllCategory" resultMap="BaseResultMap">
     SELECT  * from category
   </select>
+  <update id="deleteById">
+    update category set dr=0 where
+    id=#{id} or parent_id =#{id} and dr=1
+  </update>
 </mapper>

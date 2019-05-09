@@ -3,7 +3,7 @@ pageEncoding="UTF-8"%>
 <html>
 <head>
 <title></title>
-    <script type="text/javascript" src="js/register.js"></script>
+    <script type="text/javascript" src="/js/register.js"></script>
 </head>
 <body>
 <form  action="${pageContext.request.contextPath}/user/register" method="post" onsubmit="return checkInfo()">
