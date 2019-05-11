@@ -6,11 +6,11 @@ addToCart=function(bookId,bookName){
         url:'/collection/add',
         data:JSON.stringify({bookId:bookId,bookName:bookName}),
         success:function(){
-            alert("ok")
+            alert("已添加入购物车")
 
         },
         error:function(){
-            alert(url);
+            alert("未知原因添加购物车失败，请稍后重试");
         }
     })
 }

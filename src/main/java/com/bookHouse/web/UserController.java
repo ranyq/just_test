@@ -12,7 +12,10 @@ import com.bookHouse.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -116,6 +119,14 @@ public class UserController {
         int result=userService.updateByUserId(user);
         mv=new ModelAndView("redirect:/user/toMyspace");
         return mv;
+    }
+
+    @RequestMapping(value="/checkusername",method = RequestMethod.POST)
+    @ResponseBody
+    public int checkUserName(@RequestBody Map<String,Object> param){
+        String username=param.get("name").toString();
+        int count=userService.selectByUserName(username);
+        return count;
     }
 
 }

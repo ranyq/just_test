@@ -32,9 +32,11 @@
 <ul id="categoryShow">
     <% for(Category parentcategory:parentcategorylist){%>
     <li><%=parentcategory.getCategoryName()%></li>
+    <a href="/categorys/delete?id=<%=parentcategory.getId()%>">删除</a>
     <% for(Category childcategory:allcategorylist){
     if(childcategory.getParentId()==parentcategory.getId()&&childcategory.getLevel()==2){%>
     <li><%=childcategory.getCategoryName()%></li>
+    <a href="/categorys/delete?id=<%=childcategory.getId()%>">删除</a>
     <%}
     }%>
     <%}%>

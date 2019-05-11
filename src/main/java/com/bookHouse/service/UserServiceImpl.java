@@ -84,5 +84,11 @@ public class UserServiceImpl implements UserService {
         return userMapper.updateByPrimaryKeySelective(user);
     }
 
+    public int selectByUserName(String username){
+        User condition=new User();
+        condition.setName(username);
+        return userMapper.countByCondition(condition);
+    }
+
 
 }

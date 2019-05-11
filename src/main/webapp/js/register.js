@@ -16,3 +16,27 @@ function checkInfo(){
     }
 
 }
+
+function checkUserName(){
+    var name=document.getElementById("name").value;
+    $.ajax({
+        type:'post',
+        dataType:'json',
+        contentType: 'application/json; charset=UTF-8',
+        url:'/user/checkusername',
+        data:JSON.stringify({name:name}),
+        success:function(data){
+            var result=JSON.parse(data);
+            if(result>0){
+                document.getElementById("submit").setAttribute("disabled","true");
+                document.getElementById("checkresult").innerHTML="用户名重复，请重新输入！";
+
+            }else{
+                document.getElementById("submit").removeAttribute("disabled");
+                document.getElementById("checkresult").innerHTML="";
+            }
+        },
+        error:function(){
+        }
+    })
+}

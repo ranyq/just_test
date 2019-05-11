@@ -21,4 +21,6 @@ public interface UserMapper {
     List<User> selectByCondition(User user);
 
     List<User> selectByKeywordWithPage(Map<String,Object> param);
+
+    int countByCondition (User condition);
 }

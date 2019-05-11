@@ -12,4 +12,5 @@ public interface UserService {
      User selectById(int id);
      int deleteByUserId(int id);
      int updateByUserId(User user);
+    int selectByUserName(String username);
 }
