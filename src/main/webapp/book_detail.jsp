@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<% int isEva =Integer.parseInt(request.getAttribute("isEva").toString()); %>
+<% int isCollect =Integer.parseInt(request.getAttribute("isCollect").toString()); %>
 <html>
 <head>
     <title></title>

@@ -60,8 +60,9 @@ public class BookServiceImpl implements BookService {
             System.out.println(filename);
             //文件保存路径
             File dir=new File(localPath,filename);
-               try{ bookWithFile.getCover().transferTo(dir);
-                   resultmap=dir.getCanonicalPath();
+               try{
+                   bookWithFile.getCover().transferTo(dir);
+                   resultmap="/upload/images/bookcover/"+filename;
                }
                catch(Exception e){
 

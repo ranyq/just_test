@@ -24,7 +24,7 @@
     <table>
         <tr>
             <%for(Book book:booklist){%>
-            <td><img src=""/>
+            <td><img src="upload/"+''/>
                 <%=book.getBookName()%>
                 <%=book.getAuthor()%>
             </td>

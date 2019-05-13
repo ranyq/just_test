@@ -18,6 +18,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -50,11 +52,18 @@ public class CategoryController {
 
     @RequestMapping ("/delete")
     public  ModelAndView delete(int id){
-        categoryService.deleteById(id);
-        ModelAndView mv=new ModelAndView("redirect:/manage/managecategory");
+        ModelAndView mv=new ModelAndView();
+        Map<String,Object> condition=new HashMap<String,Object>();
+        condition.put("categoryid",id);
+       List<Book> booklist=bookService.selectByConditionWithPage(condition);
+        if(booklist.size()>0){
+            mv = new ModelAndView("redirect:/manage/managecategory");
+
+        }else {
+            categoryService.deleteById(id);
+            mv = new ModelAndView("redirect:/manage/managecategory");
+        }
         return mv;
     }
-
-
 
 }

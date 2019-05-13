@@ -2,6 +2,7 @@ package com.bookHouse.web;
 
 
 import com.bookHouse.api.BookService;
+import com.bookHouse.api.CollectionService;
 import com.bookHouse.api.EvaluationService;
 import com.bookHouse.api.UserService;
 import com.bookHouse.domain.*;
@@ -33,6 +34,8 @@ public class BookController {
     private BookService bookService;
     @Autowired
     private EvaluationService evaluationService;
+    @Autowired
+    private CollectionService collectionService;
 
 
     @RequestMapping("/upload")
@@ -43,12 +46,30 @@ public class BookController {
     }
 
     @RequestMapping("/detail")
-    public ModelAndView getDetail(int id){
+    public ModelAndView getDetail(int id,HttpServletRequest request){
         ModelAndView mv=new ModelAndView();
+        int isEva=0;
+        int isCollect=0;
+        int userId=Integer.parseInt(request.getSession().getAttribute("").toString());
         Book book=bookService.selectDetailById(id);
         List<Evaluation> evalist=evaluationService.selectByBookId(id);
+        for(int i=0;i<=evalist.size();i++){
+            if(evalist.get(i).getUserId()==userId){
+                isEva=1;
+                break;
+            }
+        }
+        Collection conditionco=new Collection();
+        conditionco.setUserId(userId);
+        conditionco.setBookId(id);
+        List<Collection> collectlist=collectionService.selectByCondition(conditionco);
+        if(collectlist.size()>0){
+            isCollect=1;
+        }
         mv.addObject("book",book);
         mv.addObject("evalist",evalist);
+        mv.addObject("isEva",isEva);
+        mv.addObject("isCollect",isCollect);
         mv.setViewName("/book_detail");
         return mv;
     }
@@ -83,7 +104,7 @@ public class BookController {
         // 创建输出流
         OutputStream out = response.getOutputStream();
         // 创建缓冲区
-        byte buffer[] = new byte[1024]; // 缓冲区的大小设置是个迷  我也没搞明白
+        byte buffer[] = new byte[1024]; //
         int len = 0;
         //循环将输入流中的内容读取到缓冲区当中
         while((len = in.read(buffer)) > 0){
@@ -113,7 +134,7 @@ public class BookController {
         mv.addObject("result",bookresult);
         mv.addObject("currentPage",page);
         mv.addObject("pageSize",pageSize);
-        mv.setViewName("bookresult");
+        mv.setViewName("searchByKeywordResult");
         return mv;
     }
 
